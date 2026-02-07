@@ -1,0 +1,342 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    overflow: hidden;
+    background: #000000;
+    position: relative;
+    height: 100vh;
+}
+
+/* Container pour les bulles */
+.bubbles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Styles des bulles avec photos */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(138, 43, 226, 0.1);
+    backdrop-filter: blur(10px);
+    border: 3px solid #ff00ff;
+    box-shadow: 
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 60px #ff00ff,
+        inset 0 0 20px rgba(255, 0, 255, 0.3);
+    overflow: hidden;
+    animation: float linear infinite;
+}
+
+.bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    filter: brightness(1.2) saturate(1.3) contrast(1.1);
+    mix-blend-mode: screen;
+}
+
+/* Animation de flottement et rotation */
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(1);
+        opacity: 0;
+        filter: hue-rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20vh) rotate(360deg) scale(1.1);
+        opacity: 0;
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Effet liquid sur les bulles */
+.bubble::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle, 
+        rgba(255, 0, 255, 0.4) 0%, 
+        rgba(138, 43, 226, 0.2) 50%,
+        transparent 70%
+    );
+    animation: liquid 8s ease-in-out infinite;
+}
+
+@keyframes liquid {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(10%, -10%) scale(1.1);
+    }
+    66% {
+        transform: translate(-10%, 10%) scale(0.9);
+    }
+}
+
+/* Texte d'amour */
+.love-text {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: #ff00ff;
+    padding: 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 3px solid #ff00ff;
+    box-shadow: 
+        0 0 30px #ff00ff,
+        0 0 60px #ff00ff,
+        0 0 90px rgba(255, 0, 255, 0.5),
+        inset 0 0 30px rgba(255, 0, 255, 0.1);
+    animation: fadeInScale 2s ease-out, borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+@keyframes borderPulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px #ff00ff,
+            0 0 60px #ff00ff,
+            0 0 90px rgba(255, 0, 255, 0.5),
+            inset 0 0 30px rgba(255, 0, 255, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 40px #ff00ff,
+            0 0 80px #ff00ff,
+            0 0 120px rgba(255, 0, 255, 0.7),
+            inset 0 0 40px rgba(255, 0, 255, 0.2);
+    }
+}
+
+.love-text h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4em;
+    margin-bottom: 30px;
+    font-weight: 900;
+    color: #ff00ff;
+    text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 30px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 70px #ff00ff,
+        0 0 80px #ff00ff;
+    animation: neonGlow 2s ease-in-out infinite;
+    letter-spacing: 3px;
+}
+
+@keyframes neonGlow {
+    0%, 100% {
+        text-shadow: 
+            0 0 10px #ff00ff,
+            0 0 20px #ff00ff,
+            0 0 30px #ff00ff,
+            0 0 40px #ff00ff,
+            0 0 70px #ff00ff,
+            0 0 80px #ff00ff;
+    }
+    50% {
+        text-shadow: 
+            0 0 20px #ff00ff,
+            0 0 30px #ff00ff,
+            0 0 40px #ff00ff,
+            0 0 50px #ff00ff,
+            0 0 90px #ff00ff,
+            0 0 100px #ff00ff;
+    }
+}
+
+.love-text p {
+    font-size: 1.6em;
+    line-height: 1.9;
+    margin-bottom: 25px;
+    font-weight: 400;
+    color: #e600ff;
+    text-shadow: 
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 15px rgba(255, 0, 255, 0.5);
+    opacity: 0;
+    animation: fadeInText 1s ease-in forwards;
+}
+
+@keyframes fadeInText {
+    to {
+        opacity: 1;
+    }
+}
+
+.heart {
+    display: inline-block;
+    color: #ff1493;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    font-size: 1.2em;
+    text-shadow: 
+        0 0 10px #ff1493,
+        0 0 20px #ff1493,
+        0 0 30px #ff1493;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.3);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+/* Overlay pour démarrer l'audio */
+.start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+.start-button {
+    background: transparent;
+    border: 3px solid #ff00ff;
+    padding: 30px 60px;
+    font-size: 2.5em;
+    font-family: 'Orbitron', sans-serif;
+    color: #ff00ff;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff,
+        0 0 60px rgba(255, 0, 255, 0.5),
+        inset 0 0 20px rgba(255, 0, 255, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 20px #ff00ff,
+            0 0 40px #ff00ff,
+            0 0 60px rgba(255, 0, 255, 0.5),
+            inset 0 0 20px rgba(255, 0, 255, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 30px #ff00ff,
+            0 0 60px #ff00ff,
+            0 0 90px rgba(255, 0, 255, 0.7),
+            inset 0 0 30px rgba(255, 0, 255, 0.2);
+    }
+}
+
+.start-button:hover {
+    background: rgba(255, 0, 255, 0.1);
+    transform: scale(1.1);
+    box-shadow: 
+        0 0 30px #ff00ff,
+        0 0 60px #ff00ff,
+        0 0 90px rgba(255, 0, 255, 0.8),
+        inset 0 0 30px rgba(255, 0, 255, 0.2);
+}
+
+/* Effet de scan néon sur le fond */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 0, 255, 0.05) 50%,
+        transparent 100%
+    );
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .love-text {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .love-text h1 {
+        font-size: 2.5em;
+    }
+
+    .love-text p {
+        font-size: 1.3em;
+    }
+
+    .start-button {
+        font-size: 1.8em;
+        padding: 20px 40px;
+    }
+}
